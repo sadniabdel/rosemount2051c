@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # macOS system files
 .DS_Store
 .AppleDouble
@@ -23,3 +24,7 @@ Icon
 .env
 .venv/
 *.swp
+=======
+node_modules/
+resources/_gen/
+>>>>>>> init Hugo + Product Launch theme

@@ -1,0 +1,27 @@
+baseURL = "https://rosemount2051c.com/"
+languageCode = "en-us"
+title = "Rosemount 2051C — Differential & Gauge Pressure Transmitters"
+theme = "hugo-product-launch"
+enableRobotsTXT = true
+
+[params]
+  subtitle = "Versatile DP & GP transmitter for pressure, level & flow"
+  description = "Buy Rosemount 2051C Differential and Gauge Pressure Transmitter. Expert support and fast quotes."
+  heroButtonText = "Request a Quote"
+  heroButtonURL = "/contact/"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    name = "Product"
+    url = "/product/"
+    weight = 2
+
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 3
