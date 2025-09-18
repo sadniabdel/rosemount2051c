@@ -28,3 +28,8 @@ Icon
 node_modules/
 resources/_gen/
 >>>>>>> init Hugo + Product Launch theme
+public/
+resources/_gen/
+hugo_stats.json
+node_modules/
+.DS_Store
