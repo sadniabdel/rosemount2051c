@@ -1,0 +1,36 @@
+<!doctype html>
+<html class="bg-white antialiased" lang="{{ .Site.LanguageCode }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+
+    <!-- SEO Meta Tags -->
+    {{- partial "seo.html" . -}}
+
+    <!-- Theme Head -->
+    {{- partial "head/styling.html" . -}}
+    {{- partial "custom_head.html" . -}}
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://formspree.io">
+    <link rel="dns-prefetch" href="https://formspree.io">
+  </head>
+  <body>
+    {{- block "main" . }}{{- end }}
+    {{- partial "footer.html" . -}}
+
+    <!-- Anti-scraping: Disable right-click context menu on sensitive elements -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var sensitiveElements = document.querySelectorAll('.product-card, .product-specs');
+        sensitiveElements.forEach(function(el) {
+          el.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

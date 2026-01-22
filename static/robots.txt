@@ -1,0 +1,36 @@
+User-agent: *
+Allow: /
+Allow: /catalog/
+Allow: /product/
+Allow: /contact/
+Disallow: /admin/
+Disallow: /*.json$
+Disallow: /*?*
+
+# Crawl-delay to prevent aggressive scraping
+Crawl-delay: 2
+
+# Sitemap
+Sitemap: https://rosemount2051c.com/sitemap.xml
+
+# Block known scrapers and bad bots
+User-agent: scrapy
+Disallow: /
+
+User-agent: wget
+Disallow: /
+
+User-agent: curl
+Disallow: /
+
+User-agent: HTTrack
+Disallow: /
+
+User-agent: WebCopier
+Disallow: /
+
+User-agent: WebZIP
+Disallow: /
+
+User-agent: WebReaper
+Disallow: /

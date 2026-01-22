@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # macOS system files
 .DS_Store
 .AppleDouble
@@ -12,24 +11,14 @@ Icon
 /public/
 /resources/_gen/
 /hugo_stats.json
+.hugo_build.lock
 
 # Node
 /node_modules/
 /npm-debug.log
 /yarn-error.log
-/package-lock.json
-/pnpm-lock.yaml
 
 # Local envs & tools
 .env
 .venv/
 *.swp
-=======
-node_modules/
-resources/_gen/
->>>>>>> init Hugo + Product Launch theme
-public/
-resources/_gen/
-hugo_stats.json
-node_modules/
-.DS_Store
