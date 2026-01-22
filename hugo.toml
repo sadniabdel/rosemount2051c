@@ -7,6 +7,7 @@ defaultContentLanguage = "en"
 
 # The name of this wonderful theme ;-).
 theme = "hugo-product-launch"
+<<<<<<< HEAD
 
 # The "title" of your website
 title = "Builders Of The Future, Inc."
@@ -17,19 +18,55 @@ title = "Builders Of The Future, Inc."
     [markup.goldmark]
         [markup.goldmark.renderer]
             hardWraps = true
+=======
+enableRobotsTXT = true
+enableGitInfo = true
+enableEmoji = true
+canonifyURLs = true
+
+# SEO optimizations
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+>>>>>>> 43499acb5497859e866b4dd8639666070ab287be
 
 [params]
     # A "copyright"-line to be added at the bottom of the page.
     # Hint: Markdown is supported in here as well. So you may e.g. add a link to your legal imprint-page.
     copyright = "© Builders Of The Future, Inc."
 
+<<<<<<< HEAD
     # The "description" of your website. This is used in the meta data of your generated html.
     description = "You don't even know what we can do for you!"
+=======
+  # SEO params
+  author = "Rosemount 2051C Sales Team"
+  keywords = "Rosemount 2051C, pressure transmitter, differential pressure, gauge pressure, Emerson, industrial automation"
+  images = ["/images/rosemount-2051c.jpg"]
+
+  # Social media
+  twitter = "@rosemount"
+
+  # Analytics (add your Google Analytics ID here)
+  # googleAnalytics = "G-XXXXXXXXXX"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+>>>>>>> 43499acb5497859e866b4dd8639666070ab287be
 
     # The path to your "favicon". This should be a square (at least 32px x 32px) png-file.
     # Hint: It's good practise to also put a "favicon.ico"-file into your "static"-folder.
     favicon = "images/favicon.png"
 
+<<<<<<< HEAD
     # These "images" are used for the structured data templates. This will show up, when
     # services like Twitter or Slack want to generate a preview of a link to your site.
     # See https://gohugo.io/templates/internal#twitter-cards and
@@ -72,3 +109,14 @@ title = "Builders Of The Future, Inc."
     disableWatch = true
     source = 'hugo_stats.json'
     target = 'assets/notwatching/hugo_stats.json'
+=======
+  [[menu.main]]
+    name = "Catalog"
+    url = "/catalog/"
+    weight = 3
+
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 4
+>>>>>>> 43499acb5497859e866b4dd8639666070ab287be
