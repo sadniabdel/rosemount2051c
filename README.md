@@ -80,13 +80,15 @@ This site is configured for deployment on Cloudflare Pages.
 1. Go to your Cloudflare dashboard → Workers & Pages
 2. Connect your GitHub repository
 3. Configure build settings:
-   - **Build command:** `hugo --gc --minify`
+   - **Build command:** `chmod +x build.sh && ./build.sh`
    - **Build output directory:** `public`
    - **Root directory:** `/`
 4. Add environment variables:
    - `HUGO_VERSION`: `0.121.0` (or your preferred version)
    - `NODE_VERSION`: `18`
    - `HUGO_ENV`: `production`
+
+⚠️ **Important:** The build command includes `git submodule update --init --recursive` to initialize the theme submodule. This is required because Cloudflare Pages doesn't automatically initialize submodules.
 
 The site will automatically deploy when you push to your main branch.
 
