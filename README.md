@@ -72,9 +72,25 @@ Update email addresses in:
 
 ## Deployment
 
-The site automatically deploys to GitHub Pages when you push to the main branch via GitHub Actions.
+### Cloudflare Pages
 
-To deploy manually:
+This site is configured for deployment on Cloudflare Pages.
+
+**Cloudflare Pages Configuration:**
+1. Go to your Cloudflare dashboard → Workers & Pages
+2. Connect your GitHub repository
+3. Configure build settings:
+   - **Build command:** `hugo --gc --minify`
+   - **Build output directory:** `public`
+   - **Root directory:** `/`
+4. Add environment variables:
+   - `HUGO_VERSION`: `0.121.0` (or your preferred version)
+   - `NODE_VERSION`: `18`
+   - `HUGO_ENV`: `production`
+
+The site will automatically deploy when you push to your main branch.
+
+**Manual Build:**
 ```bash
 hugo --gc --minify
 ```
