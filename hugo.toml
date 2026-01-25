@@ -1,18 +1,19 @@
 baseURL = "https://rosemount2051c.com/"
 languageCode = "en-us"
 title = "Rosemount 2051C — Differential & Gauge Pressure Transmitters"
-theme = "hugo-product-launch"
+theme = "careercanvas"
 enableRobotsTXT = true
 enableGitInfo = true
-enableEmoji = true
 canonifyURLs = true
 
-# Render line-breaks in .md-files as line-breaks in HTML.
-# This is e.g. useful for rendering a multi-line address.
+# Render line-breaks in .md-files as line-breaks in HTML
 [markup]
-    [markup.goldmark]
-        [markup.goldmark.renderer]
-            hardWraps = true
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      hardWraps = true
+      unsafe = true
+  [markup.highlight]
+    style = "monokai"
 
 # SEO optimizations
 [sitemap]
@@ -25,17 +26,24 @@ canonifyURLs = true
   category = "categories"
 
 [params]
-  subtitle = "Versatile DP & GP transmitter for pressure, level & flow"
-  description = "Buy Rosemount 2051C Differential and Gauge Pressure Transmitter. Expert support and fast quotes. Browse over 15,000 configurations."
-  copyright = "© 2025 Rosemount 2051C. All rights reserved."
+  # Company/Product Information
+  name = "Rosemount 2051C"
+  tagline = "Industry-Leading Differential & Gauge Pressure Transmitters"
+  location = "Worldwide"
+  email = "sales@rosemount2051c.com"
+  description = "Browse over 15,000 configurations of the Rosemount 2051C pressure transmitter. High accuracy, exceptional stability, and proven reliability for your most demanding applications."
+  author = "Rosemount 2051C Sales Team"
+
+  # Hero Section
+  hero_background = "/images/hero-rosemount.jpg"
+  profile_image = "/images/rosemount-logo.png"
 
   # SEO params
-  author = "Rosemount 2051C Sales Team"
-  keywords = "Rosemount 2051C, pressure transmitter, differential pressure, gauge pressure, Emerson, industrial automation, flow measurement"
+  keywords = "Rosemount 2051C, pressure transmitter, differential pressure, gauge pressure, Emerson, industrial automation, flow measurement, level measurement"
+  copyright = "© 2025 Rosemount 2051C. All rights reserved."
 
   # Open Graph / Social Media
-  images = ["/images/rosemount-2051c.jpg"]
-  title = "Rosemount 2051C — Differential & Gauge Pressure Transmitters"
+  images = ["/images/rosemount-2051c-share.jpg"]
 
   # Social media
   twitter = "@rosemount"
@@ -43,44 +51,165 @@ canonifyURLs = true
   # Analytics (add your Google Analytics ID here)
   # googleAnalytics = "G-XXXXXXXXXX"
 
-[menu]
-  [[menu.main]]
-    name = "Home"
-    url = "/"
-    weight = 1
+  # Enable search
+  enable_search = true
 
-  [[menu.main]]
-    name = "Product"
-    url = "/product/"
-    weight = 2
+  # Form endpoint (update with your Formspree ID)
+  form_action = "https://formspree.io/f/your-id"
 
-  [[menu.main]]
-    name = "Catalog"
-    url = "/catalog/"
-    weight = 3
+  # Color Configuration - Teal/Blue theme for industrial/technical feel
+  [params.colors]
+    [params.colors.base]
+      # Teal Palette (Primary Brand Color)
+      teal_50 = "#f0fdfa"
+      teal_100 = "#ccfbf1"
+      teal_200 = "#99f6e4"
+      teal_300 = "#5eead4"
+      teal_400 = "#2dd4bf"
+      teal_500 = "#14b8a6"
+      teal_600 = "#0d9488"
+      teal_700 = "#0f766e"
+      teal_800 = "#115e59"
+      teal_900 = "#134e4a"
 
-  [[menu.main]]
-    name = "Contact"
-    url = "/contact/"
-    weight = 4
+      # Blue Palette (Secondary)
+      blue_50 = "#eff6ff"
+      blue_100 = "#dbeafe"
+      blue_200 = "#bfdbfe"
+      blue_300 = "#93c5fd"
+      blue_400 = "#60a5fa"
+      blue_500 = "#3b82f6"
+      blue_600 = "#2563eb"
+      blue_700 = "#1d4ed8"
+      blue_800 = "#1e40af"
+      blue_900 = "#1e3a8a"
 
-# Tailwind CSS build configuration for Hugo.
-# See https://gohugo.io/functions/css/tailwindcss.
-[build]
-  [build.buildStats]
-    enable = true
-  [[build.cachebusters]]
-    source = 'assets/notwatching/hugo_stats\.json'
-    target = 'css'
-  [[build.cachebusters]]
-    source = '(postcss|tailwind)\.config\.js'
-    target = 'css'
+      # Gray Palette
+      gray_50 = "#f9fafb"
+      gray_100 = "#f3f4f6"
+      gray_200 = "#e5e7eb"
+      gray_300 = "#d1d5db"
+      gray_400 = "#9ca3af"
+      gray_500 = "#6b7280"
+      gray_600 = "#4b5563"
+      gray_700 = "#374151"
+      gray_800 = "#1f2937"
+      gray_900 = "#111827"
 
-[module]
-  [[module.mounts]]
-    source = 'assets'
-    target = 'assets'
-  [[module.mounts]]
-    disableWatch = true
-    source = 'hugo_stats.json'
-    target = 'assets/notwatching/hugo_stats.json'
+      # Green Palette (Success/Status)
+      green_100 = "#dcfce7"
+      green_200 = "#bbf7d0"
+      green_400 = "#4ade80"
+      green_500 = "#22c55e"
+      green_600 = "#16a34a"
+      green_800 = "#166534"
+      green_900 = "#14532d"
+
+      # Other Colors
+      white = "#ffffff"
+      black = "#000000"
+      dark_blue = "#02081b"
+
+    # Semantic Color Mapping
+    [params.colors.semantic]
+      primary = "teal_600"
+      primary_dark = "teal_700"
+      primary_light = "teal_500"
+      primary_lighter = "teal_400"
+
+      secondary = "blue_600"
+      secondary_dark = "blue_700"
+      secondary_light = "blue_500"
+
+      success = "green_500"
+      success_dark = "green_600"
+      success_light = "green_400"
+
+    # Light Mode Colors
+    [params.colors.light]
+      background = "white"
+      background_secondary = "gray_50"
+      background_tertiary = "gray_100"
+      background_card = "white"
+      background_card_secondary = "gray_50"
+
+      text_primary = "gray_900"
+      text_secondary = "gray_700"
+      text_tertiary = "gray_500"
+      text_muted = "gray_400"
+
+      border_primary = "gray_300"
+      border_secondary = "gray_200"
+      border_accent = "teal_300"
+
+    # Dark Mode Colors
+    [params.colors.dark]
+      background = "gray_900"
+      background_secondary = "gray_800"
+      background_tertiary = "gray_700"
+      background_card = "gray_800"
+      background_card_secondary = "gray_700"
+
+      text_primary = "gray_50"
+      text_secondary = "gray_300"
+      text_tertiary = "gray_400"
+      text_muted = "gray_500"
+
+      border_primary = "gray_600"
+      border_secondary = "gray_700"
+      border_accent = "teal_400"
+
+    # Hero Section Colors
+    [params.colors.hero]
+      background_gradient_from = "black"
+      background_gradient_via1 = "dark_blue"
+      background_gradient_via2 = "teal_900"
+      background_gradient_to = "black"
+
+      overlay_color = "teal_400"
+      overlay_opacity = "0.3"
+      overlay_opacity_dark = "0.2"
+
+      name_gradient_from = "white"
+      name_gradient_to = "teal_100"
+      name_gradient_to_dark = "teal_200"
+
+      tagline_color = "teal_100"
+      tagline_color_dark = "teal_200"
+      description_color = "teal_50"
+      description_color_dark = "teal_100"
+      greeting_color = "teal_200"
+      greeting_color_dark = "teal_300"
+
+      location_badge_bg = "teal_500"
+      location_badge_text = "white"
+
+# Navigation Menu
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  name = "Products"
+  url = "/#products"
+  weight = 2
+
+[[menu.main]]
+  name = "Catalog"
+  url = "/catalog/"
+  weight = 3
+
+[[menu.main]]
+  name = "Applications"
+  url = "/#applications"
+  weight = 4
+
+[[menu.main]]
+  name = "Contact"
+  url = "/#contact"
+  weight = 5
+
+# Outputs for search functionality
+[outputs]
+  home = ["HTML", "RSS", "JSON"]

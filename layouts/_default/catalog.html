@@ -1,312 +1,190 @@
 {{ define "main" }}
-<!doctype html>
-<html class="bg-white antialiased" lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+{{ partial "head.html" . }}
+<body class="bg-gray-50 dark:bg-gray-900">
+  {{ partial "nav.html" . }}
 
-    <!-- SEO Meta Tags -->
-    <title>{{ .Title }} | {{ .Site.Title }}</title>
-    <meta name="description" content="{{ .Params.description | default .Site.Params.description }}">
-    <meta name="keywords" content="{{ .Params.keywords }}">
-    <meta name="author" content="{{ .Site.Title }}">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="{{ .Permalink }}">
+  <!-- Page Header -->
+  <section class="bg-gradient-to-r from-teal-600 to-blue-600 text-white py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ .Title }}</h1>
+        <p class="text-xl text-teal-50">{{ .Params.description }}</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ .Permalink }}">
-    <meta property="og:title" content="{{ .Title }}">
-    <meta property="og:description" content="{{ .Params.description | default .Site.Params.description }}">
-    <meta property="og:site_name" content="{{ .Site.Title }}">
+  <!-- Error Message -->
+  <div id="errorMessage" class="hidden fixed top-4 right-4 z-50 bg-red-100 border border-red-400 text-red-700 px-6 py-4 rounded-lg shadow-lg max-w-md">
+  </div>
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="{{ .Permalink }}">
-    <meta name="twitter:title" content="{{ .Title }}">
-    <meta name="twitter:description" content="{{ .Params.description | default .Site.Params.description }}">
+  <!-- Main Content -->
+  <div class="container mx-auto px-4 py-12">
+    <!-- Filter Section -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
+      <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Filter Configurations</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Search Model Code</label>
+          <input type="text" id="searchInput" onkeyup="filterConfigurations()"
+                 class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-white"
+                 placeholder="Enter model code...">
+        </div>
 
-    <!-- Schema.org structured data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": "Rosemount 2051C Pressure Transmitter",
-      "description": "{{ .Params.description }}",
-      "brand": {
-        "@type": "Brand",
-        "name": "Rosemount"
-      },
-      "manufacturer": {
-        "@type": "Organization",
-        "name": "Emerson"
-      },
-      "category": "Pressure Transmitters",
-      "url": "{{ .Permalink }}"
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Output Type</label>
+          <select id="outputFilter" onchange="filterConfigurations()"
+                  class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-white">
+            <option value="">All Outputs</option>
+            <option value="A">4-20 mA HART</option>
+            <option value="M">4-20 mA HART + LCD</option>
+            <option value="N">Foundation Fieldbus</option>
+            <option value="P">PROFIBUS PA</option>
+            <option value="Q">WirelessHART</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Housing Type</label>
+          <select id="housingFilter" onchange="filterConfigurations()"
+                  class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-white">
+            <option value="">All Housings</option>
+            <option value="A">Aluminum (Standard)</option>
+            <option value="D">Stainless Steel (Standard)</option>
+            <option value="G">Explosion Proof Aluminum</option>
+            <option value="H">Explosion Proof Stainless</option>
+            <option value="J">NEMA 4X Polycarbonate</option>
+            <option value="L">Weather Resistant Polymer</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Pressure Range</label>
+          <select id="rangeFilter" onchange="filterConfigurations()"
+                  class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-white">
+            <option value="">All Ranges</option>
+            <option value="A">0.3 to 3 kPa</option>
+            <option value="B">1 to 10 kPa</option>
+            <option value="C">2.5 to 25 kPa</option>
+            <option value="D">6.2 to 62 kPa</option>
+            <option value="E">15 to 150 kPa</option>
+            <option value="F">37 to 370 kPa</option>
+            <option value="G">93 to 930 kPa</option>
+            <option value="H">210 to 2100 kPa</option>
+            <option value="J">700 to 7000 kPa</option>
+            <option value="K">2100 to 21000 kPa</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Count -->
+    <div id="resultCount" class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-6">
+      Loading configurations...
+    </div>
+
+    <!-- Product Grid -->
+    <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+      <!-- Products will be dynamically inserted here -->
+    </div>
+
+    <!-- Pagination -->
+    <div id="pagination" class="flex justify-center gap-2 flex-wrap">
+      <!-- Pagination buttons will be dynamically inserted here -->
+    </div>
+  </div>
+
+  <!-- Inquiry Form Modal -->
+  <div id="inquiryModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-8">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Request a Quote</h2>
+          <button onclick="closeInquiryForm()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-4xl leading-none">&times;</button>
+        </div>
+
+        <div class="mb-6 p-4 bg-teal-50 dark:bg-teal-900/30 rounded-lg">
+          <p class="text-sm text-gray-600 dark:text-gray-300">Model Code:</p>
+          <p id="modalModelCode" class="text-2xl font-bold text-teal-600 dark:text-teal-400"></p>
+        </div>
+
+        <form action="{{ .Site.Params.form_action }}" method="POST" onsubmit="return submitInquiry(event)">
+          <input type="hidden" id="inquiryModelCode" name="model_code">
+
+          <!-- Honeypot field for bots -->
+          <input type="text" name="_gotcha" id="website" style="position: absolute; left: -5000px;" tabindex="-1" autocomplete="off">
+
+          <div class="space-y-6">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your Name *</label>
+                <input type="text" id="name" name="name" required
+                       class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-white">
+              </div>
+
+              <div>
+                <label for="company" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Company *</label>
+                <input type="text" id="company" name="company" required
+                       class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-white">
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email *</label>
+                <input type="email" id="email" name="email" required
+                       class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-white">
+              </div>
+
+              <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Phone</label>
+                <input type="tel" id="phone" name="phone"
+                       class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-white">
+              </div>
+            </div>
+
+            <div>
+              <label for="quantity" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Quantity</label>
+              <input type="number" id="quantity" name="quantity" min="1"
+                     class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-white">
+            </div>
+
+            <div>
+              <label for="application" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Application Details</label>
+              <textarea id="application" name="application" rows="4"
+                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-white"
+                        placeholder="Please describe your application, timeline, and any specific requirements..."></textarea>
+            </div>
+
+            <div class="flex gap-4">
+              <button type="submit"
+                      class="flex-1 bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200">
+                Submit Inquiry
+              </button>
+              <button type="button" onclick="closeInquiryForm()"
+                      class="flex-1 bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-800 dark:text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {{ partial "footer.html" . }}
+
+  <!-- Catalog JavaScript -->
+  <script src="/js/catalog.js"></script>
+  <script>
+    // Initialize catalog on page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCatalog);
+    } else {
+      initCatalog();
     }
-    </script>
-
-    <!-- Tailwind CSS (from theme) -->
-    {{- partial "head/styling.html" . -}}
-
-    <!-- Custom Catalog Styles -->
-    <style>
-        .product-card {
-            border: 1px solid #e5e7eb;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-        }
-
-        .product-card:hover {
-            transform: translateY(-2px);
-        }
-
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            max-width: 600px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .filter-section {
-            background: #f9fafb;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* Anti-scraping: Add some noise elements */
-        .noise-element {
-            position: absolute;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* Prevent selection of certain elements */
-        .no-select {
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-        }
-    </style>
-</head>
-<body class="bg-gray-50">
-    <!-- Header Navigation -->
-    <nav class="bg-white shadow-md">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <a href="/" class="text-2xl font-bold text-teal-600">{{ .Site.Title }}</a>
-                <div class="space-x-4">
-                    {{ range .Site.Menus.main }}
-                    <a href="{{ .URL }}" class="text-gray-700 hover:text-teal-600">{{ .Name }}</a>
-                    {{ end }}
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <div class="container mx-auto px-4 py-8">
-        <!-- Page Header -->
-        <div class="mb-8">
-            <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ .Title }}</h1>
-            <div class="prose max-w-none">
-                {{ .Content }}
-            </div>
-        </div>
-
-        <!-- Error Message -->
-        <div id="errorMessage" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-        </div>
-
-        <!-- Filter Section -->
-        <div class="filter-section">
-            <h2 class="text-2xl font-bold mb-4">Filter Configurations</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Search Model Code</label>
-                    <input type="text" id="searchInput" onkeyup="filterConfigurations()"
-                           class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
-                           placeholder="Enter model code...">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Output Type</label>
-                    <select id="outputFilter" onchange="filterConfigurations()"
-                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-500">
-                        <option value="">All Outputs</option>
-                        <option value="A">4-20 mA HART</option>
-                        <option value="M">4-20 mA HART + LCD</option>
-                        <option value="N">Foundation Fieldbus</option>
-                        <option value="P">PROFIBUS PA</option>
-                        <option value="Q">WirelessHART</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Housing Type</label>
-                    <select id="housingFilter" onchange="filterConfigurations()"
-                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-500">
-                        <option value="">All Housings</option>
-                        <option value="A">Aluminum (Standard)</option>
-                        <option value="D">Stainless Steel (Standard)</option>
-                        <option value="G">Explosion Proof Aluminum</option>
-                        <option value="H">Explosion Proof Stainless</option>
-                        <option value="J">NEMA 4X Polycarbonate</option>
-                        <option value="L">Weather Resistant Polymer</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Pressure Range</label>
-                    <select id="rangeFilter" onchange="filterConfigurations()"
-                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-500">
-                        <option value="">All Ranges</option>
-                        <option value="A">0.3 to 3 kPa</option>
-                        <option value="B">1 to 10 kPa</option>
-                        <option value="C">2.5 to 25 kPa</option>
-                        <option value="D">6.2 to 62 kPa</option>
-                        <option value="E">15 to 150 kPa</option>
-                        <option value="F">37 to 370 kPa</option>
-                        <option value="G">93 to 930 kPa</option>
-                        <option value="H">210 to 2100 kPa</option>
-                        <option value="J">700 to 7000 kPa</option>
-                        <option value="K">2100 to 21000 kPa</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <!-- Results Count -->
-        <div id="resultCount" class="text-gray-600 mb-4 text-lg font-medium">
-            Loading configurations...
-        </div>
-
-        <!-- Product Grid -->
-        <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
-            <!-- Products will be dynamically inserted here -->
-        </div>
-
-        <!-- Pagination -->
-        <div id="pagination" class="flex justify-center gap-2 mb-8">
-            <!-- Pagination buttons will be dynamically inserted here -->
-        </div>
-
-        <!-- Anti-scraping noise elements (invisible) -->
-        <div class="noise-element">2051CABCDEFG</div>
-        <div class="noise-element">2051DXYZABC</div>
-    </div>
-
-    <!-- Inquiry Form Modal -->
-    <div id="inquiryModal" class="modal hidden">
-        <div class="modal-content">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-2xl font-bold text-gray-900">Request a Quote</h2>
-                <button onclick="closeInquiryForm()" class="text-gray-500 hover:text-gray-700 text-3xl">&times;</button>
-            </div>
-
-            <div class="mb-4">
-                <p class="text-sm text-gray-600">Model Code:</p>
-                <p id="modalModelCode" class="text-xl font-bold text-teal-600"></p>
-            </div>
-
-            <form action="https://formspree.io/f/your-id" method="POST" onsubmit="return submitInquiry(event)">
-                <input type="hidden" id="inquiryModelCode" name="model_code">
-
-                <!-- Honeypot field for bots -->
-                <div style="position: absolute; left: -5000px;">
-                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-                </div>
-
-                <div class="space-y-4">
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name *</label>
-                        <input type="text" id="name" name="name" required
-                               class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-500">
-                    </div>
-
-                    <div>
-                        <label for="company" class="block text-sm font-medium text-gray-700 mb-1">Company *</label>
-                        <input type="text" id="company" name="company" required
-                               class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-500">
-                    </div>
-
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
-                        <input type="email" id="email" name="email" required
-                               class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-500">
-                    </div>
-
-                    <div>
-                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-                        <input type="tel" id="phone" name="phone"
-                               class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-500">
-                    </div>
-
-                    <div>
-                        <label for="quantity" class="block text-sm font-medium text-gray-700 mb-1">Quantity</label>
-                        <input type="number" id="quantity" name="quantity" min="1"
-                               class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-500">
-                    </div>
-
-                    <div>
-                        <label for="application" class="block text-sm font-medium text-gray-700 mb-1">Application Details</label>
-                        <textarea id="application" name="application" rows="4"
-                                  class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
-                                  placeholder="Please describe your application, timeline, and any specific requirements..."></textarea>
-                    </div>
-
-                    <div class="flex gap-4">
-                        <button type="submit"
-                                class="flex-1 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded transition-colors duration-200">
-                            Submit Inquiry
-                        </button>
-                        <button type="button" onclick="closeInquiryForm()"
-                                class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded transition-colors duration-200">
-                            Cancel
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    {{- partial "footer.html" . -}}
-
-    <!-- Catalog JavaScript -->
-    <script src="/js/catalog.js"></script>
-    <script>
-        // Initialize catalog on page load
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initCatalog);
-        } else {
-            initCatalog();
-        }
-    </script>
+  </script>
 </body>
 </html>
 {{ end }}

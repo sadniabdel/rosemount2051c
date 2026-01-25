@@ -1,6 +1,6 @@
 # Rosemount 2051C Product Catalog Website
 
-A comprehensive product catalog website for Rosemount 2051C Differential and Gauge Pressure Transmitters built with Hugo and the Product Launch theme.
+A comprehensive product catalog website for Rosemount 2051C Differential and Gauge Pressure Transmitters built with Hugo and the CareerCanvas theme.
 
 ## Features
 
