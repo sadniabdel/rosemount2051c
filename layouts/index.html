@@ -1,0 +1,335 @@
+{{ define "main" }}
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+{{ partial "head.html" . }}
+<body class="bg-white dark:bg-gray-900">
+  {{ partial "nav.html" . }}
+
+  <!-- Hero Section with Search -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-teal-900 to-black">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.4&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+    </div>
+
+    <div class="relative z-10 container mx-auto px-4 py-20">
+      <div class="max-w-5xl mx-auto text-center">
+        <!-- Logo/Brand -->
+        <div class="mb-8">
+          <h1 class="text-5xl md:text-7xl font-bold text-white mb-4 bg-gradient-to-r from-white to-teal-100 bg-clip-text text-transparent">
+            {{ .Site.Params.name }}
+          </h1>
+          <p class="text-2xl md:text-3xl text-teal-100 font-light mb-6">
+            {{ .Site.Params.tagline }}
+          </p>
+          <p class="text-lg md:text-xl text-teal-50 max-w-3xl mx-auto mb-8">
+            {{ .Site.Params.description }}
+          </p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="mb-12">
+          <div class="max-w-2xl mx-auto">
+            <div class="relative">
+              <input
+                type="text"
+                id="heroSearch"
+                placeholder="Search configurations (e.g., '2051CD', 'HART', 'wireless')..."
+                class="w-full px-6 py-4 text-lg rounded-lg bg-white/10 backdrop-blur-md border-2 border-teal-400/30 text-white placeholder-teal-200/60 focus:outline-none focus:border-teal-400 focus:bg-white/20 transition-all"
+                onkeyup="searchProducts()"
+              />
+              <svg class="absolute right-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+            <div id="searchResults" class="mt-4 hidden bg-white dark:bg-gray-800 rounded-lg shadow-xl max-h-96 overflow-y-auto"></div>
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+          <a href="/catalog/" class="inline-flex items-center px-8 py-4 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+            </svg>
+            Browse Full Catalog
+          </a>
+          <a href="#contact" class="inline-flex items-center px-8 py-4 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white font-semibold rounded-lg border-2 border-white/30 shadow-lg transform hover:scale-105 transition-all duration-200">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            Request a Quote
+          </a>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+          <div class="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
+            <div class="text-3xl font-bold text-teal-300 mb-2">15,120+</div>
+            <div class="text-sm text-teal-100">Configurations</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
+            <div class="text-3xl font-bold text-teal-300 mb-2">±0.065%</div>
+            <div class="text-sm text-teal-100">Accuracy</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
+            <div class="text-3xl font-bold text-teal-300 mb-2">2M+</div>
+            <div class="text-sm text-teal-100">Installed Worldwide</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
+            <div class="text-3xl font-bold text-teal-300 mb-2">50+</div>
+            <div class="text-sm text-teal-100">Years Experience</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <svg class="w-6 h-6 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products" class="py-20 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white">Product Features</h2>
+        <p class="text-xl text-center text-gray-600 dark:text-gray-300 mb-16">Industry-leading performance and reliability</p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Feature Card 1 -->
+          <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
+            <div class="w-12 h-12 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-teal-600 dark:text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">High Accuracy</h3>
+            <p class="text-gray-600 dark:text-gray-300">±0.065% of span accuracy with exceptional stability over time and temperature</p>
+          </div>
+
+          <!-- Feature Card 2 -->
+          <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
+            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-blue-600 dark:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Multiple Outputs</h3>
+            <p class="text-gray-600 dark:text-gray-300">HART, Foundation Fieldbus, PROFIBUS PA, and WirelessHART options</p>
+          </div>
+
+          <!-- Feature Card 3 -->
+          <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
+            <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-green-600 dark:text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Harsh Environment Ready</h3>
+            <p class="text-gray-600 dark:text-gray-300">Explosion-proof and weatherproof housings with hazardous area certifications</p>
+          </div>
+
+          <!-- Feature Card 4 -->
+          <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
+            <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-purple-600 dark:text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Versatile Configuration</h3>
+            <p class="text-gray-600 dark:text-gray-300">10 pressure ranges from 0.3 kPa to 21,000 kPa for any application</p>
+          </div>
+
+          <!-- Feature Card 5 -->
+          <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
+            <div class="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-red-600 dark:text-red-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Global Certifications</h3>
+            <p class="text-gray-600 dark:text-gray-300">ATEX, IECEx, FM, CSA, NEPSI, and INMETRO certified</p>
+          </div>
+
+          <!-- Feature Card 6 -->
+          <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
+            <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-orange-600 dark:text-orange-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Premium Materials</h3>
+            <p class="text-gray-600 dark:text-gray-300">Hastelloy, Monel, Tantalum, and 316L SST diaphragm options</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Applications Section -->
+  <section id="applications" class="py-20 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white">Applications</h2>
+        <p class="text-xl text-center text-gray-600 dark:text-gray-300 mb-16">Trusted across industries worldwide</p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-gradient-to-br from-teal-50 to-blue-50 dark:from-gray-800 dark:to-gray-700 rounded-lg p-6 border border-teal-200 dark:border-gray-600">
+            <h3 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">Oil & Gas</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm">Production, refining, and petrochemical processing</p>
+          </div>
+          <div class="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-lg p-6 border border-blue-200 dark:border-gray-600">
+            <h3 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">Power Generation</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm">Fossil, nuclear, and renewable energy plants</p>
+          </div>
+          <div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-700 rounded-lg p-6 border border-purple-200 dark:border-gray-600">
+            <h3 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">Chemical Processing</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm">Complex chemical and specialty manufacturing</p>
+          </div>
+          <div class="bg-gradient-to-br from-green-50 to-teal-50 dark:from-gray-800 dark:to-gray-700 rounded-lg p-6 border border-green-200 dark:border-gray-600">
+            <h3 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">Water & Wastewater</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm">Municipal and industrial water treatment</p>
+          </div>
+          <div class="bg-gradient-to-br from-orange-50 to-red-50 dark:from-gray-800 dark:to-gray-700 rounded-lg p-6 border border-orange-200 dark:border-gray-600">
+            <h3 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">Food & Beverage</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm">Sanitary processing and packaging</p>
+          </div>
+          <div class="bg-gradient-to-br from-pink-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-lg p-6 border border-pink-200 dark:border-gray-600">
+            <h3 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">Pharmaceutical</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm">Clean room and sterile manufacturing</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white">Request a Quote</h2>
+        <p class="text-xl text-center text-gray-600 dark:text-gray-300 mb-12">Get expert help selecting the right configuration</p>
+
+        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-xl p-8">
+          <form action="{{ .Site.Params.form_action }}" method="POST" class="space-y-6">
+            <!-- Honeypot for bots -->
+            <input type="text" name="_gotcha" style="display:none" />
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your Name *</label>
+                <input type="text" id="name" name="name" required
+                       class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-600 dark:text-white">
+              </div>
+              <div>
+                <label for="company" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Company *</label>
+                <input type="text" id="company" name="company" required
+                       class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-600 dark:text-white">
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email *</label>
+                <input type="email" id="email" name="email" required
+                       class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-600 dark:text-white">
+              </div>
+              <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Phone</label>
+                <input type="tel" id="phone" name="phone"
+                       class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-600 dark:text-white">
+              </div>
+            </div>
+
+            <div>
+              <label for="model" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Model Code (if known)</label>
+              <input type="text" id="model" name="model" placeholder="e.g., 2051CD4A22A1AB4M5"
+                     class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-600 dark:text-white">
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Application Details *</label>
+              <textarea id="message" name="message" rows="5" required
+                        placeholder="Please describe your application, pressure range, environment conditions, and any specific requirements..."
+                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-600 dark:text-white"></textarea>
+            </div>
+
+            <div>
+              <button type="submit"
+                      class="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-4 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200">
+                Send Inquiry
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="mt-12 text-center">
+          <p class="text-gray-600 dark:text-gray-300">
+            <strong>Email:</strong> <a href="mailto:{{ .Site.Params.email }}" class="text-teal-600 dark:text-teal-400 hover:underline">{{ .Site.Params.email }}</a>
+          </p>
+          <p class="text-gray-600 dark:text-gray-300 mt-2">
+            Technical sales team typically responds within 24 hours
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{ partial "footer.html" . }}
+
+  <!-- Search Functionality -->
+  <script>
+    // Simple search functionality
+    function searchProducts() {
+      const query = document.getElementById('heroSearch').value.toLowerCase();
+      const resultsDiv = document.getElementById('searchResults');
+
+      if (query.length < 2) {
+        resultsDiv.classList.add('hidden');
+        return;
+      }
+
+      // Sample product data - in production, this would come from your catalog
+      const products = [
+        { code: '2051CD4A22A1AB4', desc: 'Differential Pressure, 6.2-62 kPa, 4-20mA HART' },
+        { code: '2051CG2A22A1AB4', desc: 'Gauge Pressure, 0.3-3 kPa, 4-20mA HART' },
+        { code: '2051CD5M22A1AB4M5', desc: 'Differential Pressure, 15-150 kPa, 4-20mA HART + LCD' },
+        { code: '2051CQ3A22A1AL', desc: 'Gauge Pressure, WirelessHART, Polymer Housing' }
+      ];
+
+      const results = products.filter(p =>
+        p.code.toLowerCase().includes(query) ||
+        p.desc.toLowerCase().includes(query)
+      );
+
+      if (results.length > 0) {
+        resultsDiv.innerHTML = results.map(r => `
+          <a href="/catalog/?search=${r.code}" class="block p-4 hover:bg-gray-100 dark:hover:bg-gray-700 border-b border-gray-200 dark:border-gray-600 last:border-0">
+            <div class="font-semibold text-gray-900 dark:text-white">${r.code}</div>
+            <div class="text-sm text-gray-600 dark:text-gray-300">${r.desc}</div>
+          </a>
+        `).join('');
+        resultsDiv.classList.remove('hidden');
+      } else {
+        resultsDiv.innerHTML = '<div class="p-4 text-gray-600 dark:text-gray-300">No results found. Try browsing the <a href="/catalog/" class="text-teal-600 dark:text-teal-400 hover:underline">full catalog</a>.</div>';
+        resultsDiv.classList.remove('hidden');
+      }
+    }
+
+    // Hide search results when clicking outside
+    document.addEventListener('click', function(event) {
+      const searchInput = document.getElementById('heroSearch');
+      const searchResults = document.getElementById('searchResults');
+      if (!searchInput.contains(event.target) && !searchResults.contains(event.target)) {
+        searchResults.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
+{{ end }}
