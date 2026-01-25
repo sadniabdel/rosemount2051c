@@ -1,15 +1,11 @@
-baseURL = "https://example.com"
-
-# This is a "one page"-website, so we do not need these kinds of pages...
-disableKinds = ["section", "taxonomy", "term", "RSS", "robotsTXT", "404"]
-
-defaultContentLanguage = "en"
-
-# The name of this wonderful theme ;-).
+baseURL = "https://rosemount2051c.com/"
+languageCode = "en-us"
+title = "Rosemount 2051C — Differential & Gauge Pressure Transmitters"
 theme = "hugo-product-launch"
-
-# The "title" of your website
-title = "Builders Of The Future, Inc."
+enableRobotsTXT = true
+enableGitInfo = true
+enableEmoji = true
+canonifyURLs = true
 
 # Render line-breaks in .md-files as line-breaks in HTML.
 # This is e.g. useful for rendering a multi-line address.
@@ -17,11 +13,6 @@ title = "Builders Of The Future, Inc."
     [markup.goldmark]
         [markup.goldmark.renderer]
             hardWraps = true
-
-enableRobotsTXT = true
-enableGitInfo = true
-enableEmoji = true
-canonifyURLs = true
 
 # SEO optimizations
 [sitemap]
@@ -34,54 +25,34 @@ canonifyURLs = true
   category = "categories"
 
 [params]
-  # A "copyright"-line to be added at the bottom of the page.
-  # Hint: Markdown is supported in here as well. So you may e.g. add a link to your legal imprint-page.
-  copyright = "© Builders Of The Future, Inc."
-
-  # The "description" of your website. This is used in the meta data of your generated html.
-  description = "You don't even know what we can do for you!"
+  subtitle = "Versatile DP & GP transmitter for pressure, level & flow"
+  description = "Buy Rosemount 2051C Differential and Gauge Pressure Transmitter. Expert support and fast quotes. Browse over 15,000 configurations."
+  copyright = "© 2025 Rosemount 2051C. All rights reserved."
 
   # SEO params
   author = "Rosemount 2051C Sales Team"
-  keywords = "Rosemount 2051C, pressure transmitter, differential pressure, gauge pressure, Emerson, industrial automation"
-  # These "images" are used for the structured data templates. This will show up, when
-  # services like Twitter or Slack want to generate a preview of a link to your site.
-  # See https://gohugo.io/templates/internal#twitter-cards and
-  # https://gohugo.io/templates/internal#open-graph.
-  images = ["/images/rosemount-2051c.jpg", "images/share-image.png"]
+  keywords = "Rosemount 2051C, pressure transmitter, differential pressure, gauge pressure, Emerson, industrial automation, flow measurement"
+
+  # Open Graph / Social Media
+  images = ["/images/rosemount-2051c.jpg"]
+  title = "Rosemount 2051C — Differential & Gauge Pressure Transmitters"
 
   # Social media
   twitter = "@rosemount"
 
-  # The path to your "favicon". This should be a square (at least 32px x 32px) png-file.
-  # Hint: It's good practise to also put a "favicon.ico"-file into your "static"-folder.
-  favicon = "images/favicon.png"
-
-  # Another "title" :-). This one is used as the site_name on the Hugo's internal
-  # opengraph structured data template.
-  # See https://ogp.me/ and https://gohugo.io/templates/internal#open-graph.
-  title = "Builders Of The Future, Inc."
-
-  # LICENSE: Hugo Product Launch by Jan Raasch is licensed
-  # under Attribution 4.0 International (CC BY 4.0).
-  # See https://github.com/janraasch/hugo-product-launch#license.
-  # This theme will, by default, inject a design-by-line at the bottom of the page.
-  # **If** you would like to use this theme without attribution,
-  # permissions beyond this license's scope **are available** at
-  # https://github.com/janraasch/hugo-product-launch/blob/master/MORE_PERMISSIONS.md
-  # hidedesignbyline = true
-
   # Analytics (add your Google Analytics ID here)
   # googleAnalytics = "G-XXXXXXXXXX"
-
-  [params.meta]
-    keywords = "some, keywords, for, seo, you, know, google, duckduckgo, and, such"
 
 [menu]
   [[menu.main]]
     name = "Home"
     url = "/"
     weight = 1
+
+  [[menu.main]]
+    name = "Product"
+    url = "/product/"
+    weight = 2
 
   [[menu.main]]
     name = "Catalog"
@@ -104,6 +75,7 @@ canonifyURLs = true
   [[build.cachebusters]]
     source = '(postcss|tailwind)\.config\.js'
     target = 'css'
+
 [module]
   [[module.mounts]]
     source = 'assets'
