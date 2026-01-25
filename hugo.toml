@@ -57,6 +57,10 @@ canonifyURLs = true
   # Form endpoint (update with your Formspree ID)
   form_action = "https://formspree.io/f/your-id"
 
+  # Pexels configuration (optional - for background images)
+  [params.pexels]
+    queries = ["industrial", "technology", "manufacturing"]
+
   # Color Configuration - Teal/Blue theme for industrial/technical feel
   [params.colors]
     [params.colors.base]
