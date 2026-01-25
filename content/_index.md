@@ -1,55 +1,90 @@
 ---
-header_brand: "Builders Of The Future, Inc."
-header_tagline_paragraph: "Yes, we are glad you made it here. In fact, the only emotion stronger than our gladness is our desire to tell you more about what we are building. Bright times lie ahead. Let's get into it!"
+header_brand: "Rosemount 2051C"
+header_tagline_paragraph: "Industry-leading differential and gauge pressure transmitters. High accuracy, exceptional stability, and proven reliability for your most demanding applications."
 header_button_cta:
-  url: "#contact-form"
-  title: "Get in touch"
+  url: "/catalog/"
+  title: "Browse Catalog"
 header_button_more:
-  url: "#the-future---today"
-  title: "Why this is awesome?"
-teaser_image: "images/teaser.jpg" # https://www.pexels.com/search/product%20testing/
+  url: "#features"
+  title: "Learn More"
 ---
 
-# The Future - Today!
+# Rosemount 2051C Pressure Transmitter {#features}
 
-Some introductory text to get you excited about what we are doing. For example, I could tell you what our [prototype](#prototype) can do and then link you to our [contact form](#contact-form) so you can get in touch to ask for a **one-on-one** (or more :-)) showcase session.
+The Rosemount 2051C is the industry standard for differential and gauge pressure measurement. With over 15,000 configurations available, you can find the exact transmitter for your application.
 
----
-
-Have we caught your attention? We appreciate your feedback at this early stage of our product. Do not hesitate to contact us. In fact, if your interested, we'd love to give you a tour of the prototype we built.
-
-{{< contact_form id="contact-form" placeholder_name="Name" placeholder_email="Email Address" placeholder_message="Message" button_label="Send ✉️">}}
-
----
-
-# Prototype
-
-You guessed it! We put our money where our mouth is. This is what we accomplished so far.
-
-![Prototype Work](images/prototype.jpg) <!-- https://www.pexels.com/search/product%20testing/ -->
-
-Check out this sweet preview. Impressed much, are you?
+**Key Features:**
+- **High Accuracy**: ±0.065% of span accuracy
+- **Proven Reliability**: Over 2 million installed worldwide
+- **Versatile**: Differential, gauge, and absolute pressure
+- **Multiple Outputs**: HART, Foundation Fieldbus, PROFIBUS PA, WirelessHART
+- **Harsh Environment Ready**: Wide temperature range, hazardous area certifications
 
 ---
 
-# Imprint & Privacy Policy
+# Product Configurations
 
-Let's keep it simple. This is our contact information:
+Our interactive catalog makes it easy to find the right configuration:
 
-Jane Doe
-1093 Simpson Square
-May 73851, OK
-USA
+- **10 Pressure Ranges**: 0.3 kPa to 21,000 kPa
+- **Multiple Materials**: Hastelloy, Monel, Tantalum, 316L SST diaphragms
+- **Various Housings**: Aluminum, stainless steel, explosion proof, weatherproof
+- **Digital Displays**: Optional LCD meters and integral displays
+- **Certifications**: ATEX, IECEx, FM, CSA, NEPSI, INMETRO
 
-E-mail: jane@doe.net
-Phone: 580-689-0577
-
-We take data privacy very seriously, so we make sure not to store anything we do not need. We do not have any tracking service, no cookies or anything like that. If you decide to use the contact form or the newsletter sign up this information will be stored on Netlify, a service we use to host this website. You can approach us any time to have your data removed or simply retrieve information about what information we did store.
+[**Browse Full Catalog →**](/catalog/)
 
 ---
 
-# Stay in touch
+# Applications
 
-Let's stay in touch. Sign up for our newsletter. Do not worry, we will not bother you with boring details. Expect nice & tight updates about once or twice every 3 months.
+The Rosemount 2051C excels in these industries and applications:
 
-{{< newsletter_sign_up id="newsletter-sign-up-form" placeholder_email="Your Email" button_label="Sign up">}}
+- Oil & Gas production and refining
+- Chemical and petrochemical processing
+- Power generation (fossil, nuclear, renewable)
+- Pulp & paper manufacturing
+- Food & beverage processing
+- Water & wastewater treatment
+- Pharmaceutical manufacturing
+
+---
+
+# Request a Quote {#contact-form}
+
+Get expert help selecting the right configuration for your application. Our technical sales team typically responds within 24 hours.
+
+{{< contact_form id="contact-form" placeholder_name="Your Name" placeholder_email="Work Email" placeholder_message="Tell us about your application, pressure range, and any special requirements..." button_label="Request Quote">}}
+
+---
+
+# Technical Support
+
+**Sales & Technical Inquiries:**
+Email: sales@rosemount2051c.com
+
+**Documentation:**
+- [Product Data Sheet (PDF)](#)
+- [Installation Manual](#)
+- [Quick Start Guide](#)
+- [Configurator Tool](/catalog/)
+
+---
+
+# Why Choose Rosemount?
+
+**Industry Leader**: Emerson's Rosemount brand has been the standard for pressure measurement for over 50 years.
+
+**Best-in-Class Performance**: Superior accuracy, stability, and rangeability compared to competitors.
+
+**Global Support**: Worldwide sales, service, and technical support network.
+
+**Investment Protection**: Long product lifecycle with backward compatibility and upgrade paths.
+
+---
+
+# Stay Updated
+
+Subscribe to receive product updates, technical bulletins, and application notes.
+
+{{< newsletter_sign_up id="newsletter-sign-up-form" placeholder_email="Your Email Address" button_label="Subscribe">}}
